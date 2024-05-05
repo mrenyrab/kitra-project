@@ -203,6 +203,7 @@ module.exports.findTreasuresByValue = async (req, res) => {
         message: "Please provide whole number for price value",
       });
     } else if (!(price_value >= 10 && price_value <= 30)) {
+      // Checks if price value is within 10-30
       return res.status(404).json({
         status: 404,
         message: "Please provide price value 10-30 only",
