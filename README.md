@@ -15,10 +15,9 @@
 ## Postman API Guides
 
 - Disregard the seed sample data folder, as it is intended for migration/seeding provided data for the project.
-- **Register** - http://localhost:4000/main/register
+- **Register** - http://localhost:4000/main/register (Bonus endpoint)
 
   - This step is optional, as there are already provided accounts. Please proceed directly to the login page.
-
     > {
     > "userId": "your-userId",
     > "name": "your-name",
@@ -27,8 +26,8 @@
     > "email": "your-email"
     > }
 
-- **Login** - http://localhost:4000/main/login
-  - Please note that you can also log in using the sample accounts available in the repository. You can find them in the sample_data folder by opening the - seedUsers.js file.
+- **Login** - http://localhost:4000/main/login (Bonus endpoint)
+  - Please note that you can also log in using the sample accounts available in the repository. You can find them in the sample_data folder by opening the seedUsers.js file.
     > {
         "email": "your-username",
         "password": "your-password"
