@@ -20,8 +20,8 @@ module.exports.login = async (req, res) => {
         });
       } else {
         return res
-          .status(400)
-          .json({ status: 400, message: "Incorrect password. Try again." });
+          .status(404)
+          .json({ status: 404, message: "Incorrect password. Try again." });
       }
     }
   } catch (error) {
@@ -35,8 +35,8 @@ module.exports.register = async (req, res) => {
 
     if (!userId || !name || !age || !password || !email) {
       return res
-        .status(400)
-        .json({ status: 400, message: "All fields are required." });
+        .status(404)
+        .json({ status: 404, message: "All fields are required." });
     }
 
     // Check email if already exists
@@ -44,8 +44,8 @@ module.exports.register = async (req, res) => {
 
     if (existingUser) {
       return res
-        .status(400)
-        .json({ status: 400, message: "Email already exists. Try again." });
+        .status(404)
+        .json({ status: 404, message: "Email already exists. Try again." });
     }
 
     // Create new user
@@ -73,8 +73,11 @@ module.exports.findTreasures = async (req, res) => {
   try {
     const { latitude, longitude, distance } = req.body;
 
+    // Only accepts distance 1 or 10
     if (distance !== 1 && distance !== 10) {
-      return res.status(404).json({ message: "Distance should be 1 or 10" });
+      return res
+        .status(404)
+        .json({ status: 404, message: "Distance should be 1 or 10" });
     }
 
     // Ensure latitude and longitude are parsed as numbers
@@ -106,18 +109,22 @@ module.exports.findTreasures = async (req, res) => {
 
     // Check if any treasures were found
     if (treasures.length === 0) {
-      return res.status(404).json({ message: "No treasures found" });
+      return res
+        .status(404)
+        .json({ status: 404, message: "No treasures found" });
     }
 
     for (const treasure of treasures) {
       const { treasureId } = treasure;
 
+      // Get the value of a treasure box according to treasureId
       const moneyValue = await MoneyValue.find({ treasureId });
 
+      // add moneyValue property to treasure object
       if (moneyValue) {
         treasuresFound.push({ ...treasure._doc, moneyValue });
       }
-    }
+    } //  End of for loop
 
     res.status(200).json({ treasuresFound });
   } catch (error) {
@@ -131,8 +138,11 @@ module.exports.findTreasuresByValue = async (req, res) => {
   try {
     const { latitude, longitude, distance, price_value } = req.body;
 
+    // Only accepts distance 1 or 10
     if (distance !== 1 && distance !== 10) {
-      return res.status(404).json({ message: "Distance should be 1 or 10" });
+      return res
+        .status(404)
+        .json({ status: 404, message: "Distance should be 1 or 10" });
     }
 
     // Ensure latitude and longitude are parsed as numbers
@@ -164,7 +174,9 @@ module.exports.findTreasuresByValue = async (req, res) => {
 
     // Check if any treasures were found
     if (treasures.length === 0) {
-      return res.status(404).json({ message: "No treasures found" });
+      return res
+        .status(404)
+        .json({ status: 404, message: "No treasures found" });
     }
 
     // If no price_value provided
@@ -172,43 +184,58 @@ module.exports.findTreasuresByValue = async (req, res) => {
       for (const treasure of treasures) {
         const { treasureId } = treasure;
 
+        // Get the value of a treasure box according to treasureId
         const moneyValues = await MoneyValue.find({ treasureId });
 
         if (moneyValues.length > 0) {
-          // Push the treasure with the lowest money value
+          // add moneyValue property to treasure object
           treasuresFound.push({ ...treasure._doc, moneyValues });
         }
       } // End of for loop
 
-      return res.status(200).json({ treasuresFound });
-    }
+      return res.status(201).json({ status: 201, treasuresFound });
+    } // End of if statement
 
+    // If price value is not a whole number
+    if (price_value % 1 !== 0) {
+      return res.status(404).json({
+        status: 404,
+        message: "Please enter whole number for price value",
+      });
+    } // End of if statement
+
+    /* Lines below executes if price value is provided */
     for (const treasure of treasures) {
       const { treasureId } = treasure;
 
+      // Get the value of a treasure box according to treasureId
       const moneyValues = await MoneyValue.find({ treasureId });
 
       if (moneyValues.length > 0) {
-        // Sort money values in ascending order
+        // Sort money values in ascending order to get the minimum money value
         moneyValues.sort((a, b) => a.value - b.value);
 
-        // Push the treasure with the lowest money value
+        // Push the treasure with the minimum money value only
         treasuresFound.push({ ...treasure._doc, moneyValue: moneyValues[0] });
       }
     } // End of for loop
 
-    // Filter treasures based on money value range
+    // Filter treasures more than $10 and maximum of price_value
     const filteredTreasures = treasuresFound.filter((treasure) => {
-      return (
-        treasure.moneyValue.amount >= 15 &&
-        treasure.moneyValue.amount <= price_value
-      );
+      return treasure.moneyValue.amount === price_value;
     });
 
-    res.status(200).json({ filteredTreasures });
+    // Check if any treasures were found
+    if (filteredTreasures.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No treasures found at that price value" });
+    }
+
+    res.status(201).json({ filteredTreasures });
   } catch (error) {
     console.error("Error finding treasures:", error);
     // Send an error response
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ status: 500, error: "Internal server error" });
   }
 }; // End of findTreasuresByValue
