@@ -200,9 +200,14 @@ module.exports.findTreasuresByValue = async (req, res) => {
     if (price_value % 1 !== 0) {
       return res.status(404).json({
         status: 404,
-        message: "Please enter whole number for price value",
+        message: "Please provide whole number for price value",
       });
-    } // End of if statement
+    } else if (!(price_value >= 10 && price_value <= 30)) {
+      return res.status(404).json({
+        status: 404,
+        message: "Please provide price value 10-30 only",
+      });
+    }
 
     /* Lines below executes if price value is provided */
     for (const treasure of treasures) {
