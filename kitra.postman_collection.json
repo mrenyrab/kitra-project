@@ -1,256 +1,301 @@
 {
-  "info": {
-    "_postman_id": "80463172-2adc-4e32-b6e3-7f68de84b789",
-    "name": "kitra copy",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "13038665"
-  },
-  "item": [
-    {
-      "name": "seed sample data",
-      "item": [
-        {
-          "name": "seed users",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "url": {
-              "raw": "http://localhost:4000/seed/seed-user",
-              "protocol": "http",
-              "host": ["localhost"],
-              "port": "4000",
-              "path": ["seed", "seed-user"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "seed treasures",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "url": {
-              "raw": "http://localhost:4000/seed/seed-treasures",
-              "protocol": "http",
-              "host": ["localhost"],
-              "port": "4000",
-              "path": ["seed", "seed-treasures"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "seed money values",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "url": {
-              "raw": "http://localhost:4000/seed/seed-money-values",
-              "protocol": "http",
-              "host": ["localhost"],
-              "port": "4000",
-              "path": ["seed", "seed-money-values"]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "find treasures",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "auth": {
-          "type": "bearer",
-          "bearer": [
-            {
-              "key": "token",
-              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MzZkODExOTc2NWFmN2U1OTBlMGZlZSIsImVtYWlsIjoidTFAa2l0cmEuYWJjIiwiaWF0IjoxNzE0ODg5MTMyfQ.FTabfloB7Mb0OTjkh5hoLv8C10xG3rq0FO9vA_Y3cxg",
-              "type": "string"
-            }
-          ]
-        },
-        "method": "GET",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"latitude\": 14.552036595352455,\r\n    \"longitude\": 121.01696118771324,\r\n    \"distance\": 1\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:4000/main/find-treasures",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "4000",
-          "path": ["main", "find-treasures"]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "find treasures by value",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "auth": {
-          "type": "bearer",
-          "bearer": [
-            {
-              "key": "token",
-              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MzcyNGMwNGExYWVhMDZhOTQyMjZiMyIsImVtYWlsIjoiZW55cmFiQGdtYWlsLmNvbSIsImlhdCI6MTcxNDkwNDI5MX0.Os35u0VcbQ1BHtsUbjfR9L5fjSdTTh-RINhbSrWrV9A",
-              "type": "string"
-            }
-          ]
-        },
-        "method": "GET",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"latitude\": 14.552036595352455,\r\n    \"longitude\": 121.01696118771324,\r\n    \"distance\": 1\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:4000/main/find-treasures-by-value",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "4000",
-          "path": ["main", "find-treasures-by-value"]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "login",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"email\": \"u1@kitra.abc\",\r\n    \"password\": \"123123\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:4000/main/login",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "4000",
-          "path": ["main", "login"]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "register",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"username\": \"u1@kitra.abc\",\r\n    \"password\": \"123123\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:4000/main/login",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "4000",
-          "path": ["main", "login"]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "find treasures",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "auth": {
-          "type": "bearer",
-          "bearer": [
-            {
-              "key": "token",
-              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MzZkODExOTc2NWFmN2U1OTBlMGZlZSIsImVtYWlsIjoidTFAa2l0cmEuYWJjIiwiaWF0IjoxNzE0OTE1NDQ2fQ.1tXOgxErLd3AOTR_70KxSiSfd6-9BoSkOd2mNVpfjdI",
-              "type": "string"
-            }
-          ]
-        },
-        "method": "GET",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"latitude\": \"14.5437648051331\",\r\n    \"longitude\": \"121.019911678311\",\r\n    \"distance\": 5\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:4000/main/find-treasures",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "4000",
-          "path": ["main", "find-treasures"]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "find treasures by value",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "auth": {
-          "type": "bearer",
-          "bearer": [
-            {
-              "key": "token",
-              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MzZkODExOTc2NWFmN2U1OTBlMGZlZSIsImVtYWlsIjoidTFAa2l0cmEuYWJjIiwiaWF0IjoxNzE0OTE1NDQ2fQ.1tXOgxErLd3AOTR_70KxSiSfd6-9BoSkOd2mNVpfjdI",
-              "type": "string"
-            }
-          ]
-        },
-        "method": "GET",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"latitude\": \"14.5437648051331\",\r\n    \"longitude\": \"121.019911678311\",\r\n    \"distance\": 10,\r\n    \"price_value\": 12\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:4000/main/find-treasures-by-value",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "4000",
-          "path": ["main", "find-treasures-by-value"]
-        }
-      },
-      "response": []
-    }
-  ]
+	"info": {
+		"_postman_id": "80463172-2adc-4e32-b6e3-7f68de84b789",
+		"name": "kitra",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13038665"
+	},
+	"item": [
+		{
+			"name": "seed sample data",
+			"item": [
+				{
+					"name": "seed users",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/seed/seed-user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"seed",
+								"seed-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "seed treasures",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/seed/seed-treasures",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"seed",
+								"seed-treasures"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "seed money values",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/seed/seed-money-values",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"seed",
+								"seed-money-values"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "find treasures",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MzZkODExOTc2NWFmN2U1OTBlMGZlZSIsImVtYWlsIjoidTFAa2l0cmEuYWJjIiwiaWF0IjoxNzE0ODg5MTMyfQ.FTabfloB7Mb0OTjkh5hoLv8C10xG3rq0FO9vA_Y3cxg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"latitude\": 14.552036595352455,\r\n    \"longitude\": 121.01696118771324,\r\n    \"distance\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/main/find-treasures",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"main",
+						"find-treasures"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find treasures by value",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MzcyNGMwNGExYWVhMDZhOTQyMjZiMyIsImVtYWlsIjoiZW55cmFiQGdtYWlsLmNvbSIsImlhdCI6MTcxNDkwNDI5MX0.Os35u0VcbQ1BHtsUbjfR9L5fjSdTTh-RINhbSrWrV9A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"latitude\": 14.552036595352455,\r\n    \"longitude\": 121.01696118771324,\r\n    \"distance\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/main/find-treasures-by-value",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"main",
+						"find-treasures-by-value"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"u1@kitra.abc\",\r\n    \"password\": \"123123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/main/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"main",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"u1@kitra.abc\",\r\n    \"password\": \"123123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/main/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"main",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find treasures",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MzcyNGMwNGExYWVhMDZhOTQyMjZiMyIsImVtYWlsIjoiZW55cmFiQGdtYWlsLmNvbSIsImlhdCI6MTcxNTAxMjg5MH0.92qaaVeVhtSJh3HBSZJEFDXkb57xE6xEkI2eDCcWQ1s",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"latitude\": \"14.5437648051331\",\r\n    \"longitude\": \"121.019911678311\",\r\n    \"distance\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/main/find-treasures",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"main",
+						"find-treasures"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find treasures by value",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MzcyNGMwNGExYWVhMDZhOTQyMjZiMyIsImVtYWlsIjoiZW55cmFiQGdtYWlsLmNvbSIsImlhdCI6MTcxNTAxMjg5MH0.92qaaVeVhtSJh3HBSZJEFDXkb57xE6xEkI2eDCcWQ1s",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"latitude\": \"14.5437648051331\",\r\n    \"longitude\": \"121.019911678311\",\r\n    \"distance\": 1,\r\n    \"prize_value\": 8\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/main/find-treasures-by-value",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"main",
+						"find-treasures-by-value"
+					]
+				}
+			},
+			"response": []
+		}
+	]
 }

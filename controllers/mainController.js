@@ -94,8 +94,9 @@ module.exports.findTreasures = async (req, res) => {
       (conversionFactor * Math.cos(parsedLatitude * (Math.PI / 180)));
 
     /* 
-      Query to find treasures within the specified latitude and longitude range 
-      and then joins the prizes document to treasure document
+      Find treasures within the specified latitude and longitude 
+      within specified distance and then joins the prizes document 
+      to treasure document
     */
     const treasures = await Treasure.aggregate([
       {
@@ -112,6 +113,7 @@ module.exports.findTreasures = async (req, res) => {
         },
       },
       {
+        // Join the prizes document to treasure document
         $lookup: {
           from: "moneyvalues",
           localField: "treasureId",
@@ -121,7 +123,7 @@ module.exports.findTreasures = async (req, res) => {
       },
     ]);
 
-    // Check if any treasures were found
+    // Check if no treasures were found
     if (treasures.length === 0) {
       return res
         .status(404)
@@ -138,7 +140,7 @@ module.exports.findTreasures = async (req, res) => {
 
 module.exports.findTreasuresByValue = async (req, res) => {
   try {
-    const { latitude, longitude, distance, price_value } = req.body;
+    const { latitude, longitude, distance, prize_value } = req.body;
 
     // Only accepts distance 1 or 10
     if (distance !== 1 && distance !== 10) {
@@ -160,11 +162,12 @@ module.exports.findTreasuresByValue = async (req, res) => {
       distance /
       (conversionFactor * Math.cos(parsedLatitude * (Math.PI / 180)));
 
-    // If no price_value provided
-    if (!price_value) {
+    // If no prize provided
+    if (!prize_value) {
       /* 
-      Query to find treasures within the specified latitude and longitude range 
-      and then joins the prizes document to treasure document
+      Find treasures within the specified latitude and longitude 
+      within specified distance and then joins the prizes document 
+      to treasure document
     */
       const allTreasures = await Treasure.aggregate([
         {
@@ -181,6 +184,7 @@ module.exports.findTreasuresByValue = async (req, res) => {
           },
         },
         {
+          // Join the prizes document to treasure document
           $lookup: {
             from: "moneyvalues",
             localField: "treasureId",
@@ -200,24 +204,24 @@ module.exports.findTreasuresByValue = async (req, res) => {
       res.status(201).send({ allTreasures });
     } // End of if statement
 
-    // If price value is not a whole number
-    if (price_value % 1 !== 0) {
+    // If prize value is not a whole number
+    if (prize_value % 1 !== 0) {
       return res.status(404).json({
         status: 404,
-        message: "Please provide whole number for price value",
+        message: "Please provide whole number for prize value",
       });
-    } else if (!(price_value >= 10 && price_value <= 30)) {
-      // Checks if price value is within 10-30
+    } else if (!(prize_value >= 10 && prize_value <= 30)) {
+      // Checks if prize value is within 10-30
       return res.status(404).json({
         status: 404,
-        message: "Please provide price value 10-30 only",
+        message: "Please provide prize value 10-30 only",
       });
     }
 
     /* 
-    Lines below executes if price value is provided 
+    Lines below executes if prize value is provided 
     - Find treasures within the specified latitude and longitude within specified distance
-    - Find treasures and get only the minimum value of prize 
+    - Filter the treasure with the specified prize_value
     - Join the prize collection into the treasure collection
     */
     const treasures = await Treasure.aggregate([
@@ -251,7 +255,7 @@ module.exports.findTreasuresByValue = async (req, res) => {
       },
       {
         $match: {
-          "prizes.amount": price_value, // Filter prizes with amount greater than or equal to specified amount
+          "prizes.amount": prize_value, // Filter prizes with amount greater than or equal to specified amount
         },
       },
       {
@@ -270,7 +274,7 @@ module.exports.findTreasuresByValue = async (req, res) => {
     if (treasures.length === 0) {
       return res
         .status(404)
-        .json({ message: "No treasures found at that price value" });
+        .json({ message: "No treasures found at that prize value" });
     }
 
     res.status(201).json({ treasures });
