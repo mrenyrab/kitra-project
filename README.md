@@ -20,14 +20,14 @@ nodemon index.js
 
 - I have provided **kitra.postman_collection** so that you may be able to **import** it on your postman for testing the project.
 
-- **Open your postman application** and **import the file** which is located on root folder of the repository.
+- **Open your postman application** and **import the collection file** which is located on root folder of the repository.
 
 ## API Guides
 
 - Disregard the seed sample data folder in the postman, as it is intended for migration/seeding provided data for the project.
 
 - **Register** - http://localhost:4000/main/register (Bonus endpoint)
-  - This step is optional, as there are already provided accounts. Please proceed directly to the login page if you dont need to register.
+  - This step is optional, as there are already provided accounts. Please proceed directly to the login page if you dont want to register.
   - Sample input in postman:
 
 ```
@@ -80,7 +80,7 @@ nodemon index.js
 - **Find treasure by value** - http://localhost:4000/main/find-treasures-by-value
   - Find treasure chests within a specified distance from the provided latitude and longitude that matches the specified price value.
   - Price value is optional. If no price value is specified, find the treasure normally same as above.
-  - If price value is specified and the treasure chest has multiple prize, only the minimum prize will be considered. So if you have treasure chest has $10, $20, $30. The $10 will be considered.
+  - If the price value is specified and the treasure chest has multiple prize, only the minimum prize will be considered. So if the treasure chest has $10, $20, $30. The $10 will be considered.
   - Please note that you must login and provide the token via Authorization>Bearer Token.
   - Sample input in postman:
 
