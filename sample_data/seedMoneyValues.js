@@ -1,4 +1,4 @@
-const treasureData = [
+const moneyValuesData = [
   { treasureId: "100", amount: 15 },
   { treasureId: "101", amount: 10 },
   { treasureId: "102", amount: 15 },
@@ -26,4 +26,4 @@ const treasureData = [
   { treasureId: "109", amount: 30 },
 ];
 
-module.exports = treasureData;
+module.exports = moneyValuesData;

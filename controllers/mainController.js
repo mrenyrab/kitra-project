@@ -87,25 +87,39 @@ module.exports.findTreasures = async (req, res) => {
     // Calculate the conversion factor for kilometers to degrees
     const conversionFactor = 111.32; // Approximately 111.32 kilometers in one degree of latitude or longitude
 
-    // Calculate the range of latitude and longitude for the given distance
+    // Calculate the range of latitude and longitude from the given distance
     const latRange = distance / conversionFactor;
     const lonRange =
       distance /
       (conversionFactor * Math.cos(parsedLatitude * (Math.PI / 180)));
 
-    // Query to find treasures within the specified latitude and longitude range
-    const treasures = await Treasure.find({
-      latitude: {
-        $gte: parsedLatitude - latRange,
-        $lte: parsedLatitude + latRange,
+    /* 
+      Query to find treasures within the specified latitude and longitude range 
+      and then joins the prizes document to treasure document
+    */
+    const treasures = await Treasure.aggregate([
+      {
+        $match: {
+          // Checks if treasure is within the given distance
+          latitude: {
+            $gte: parsedLatitude - latRange,
+            $lte: parsedLatitude + latRange,
+          },
+          longitude: {
+            $gte: parsedLongitude - lonRange,
+            $lte: parsedLongitude + lonRange,
+          },
+        },
       },
-      longitude: {
-        $gte: parsedLongitude - lonRange,
-        $lte: parsedLongitude + lonRange,
+      {
+        $lookup: {
+          from: "moneyvalues",
+          localField: "treasureId",
+          foreignField: "treasureId",
+          as: "prizes",
+        },
       },
-    });
-
-    const treasuresFound = [];
+    ]);
 
     // Check if any treasures were found
     if (treasures.length === 0) {
@@ -114,19 +128,7 @@ module.exports.findTreasures = async (req, res) => {
         .json({ status: 404, message: "No treasures found" });
     }
 
-    for (const treasure of treasures) {
-      const { treasureId } = treasure;
-
-      // Get the value of a treasure box according to treasureId
-      const moneyValue = await MoneyValue.find({ treasureId });
-
-      // add moneyValue property to treasure object
-      if (moneyValue) {
-        treasuresFound.push({ ...treasure._doc, moneyValue });
-      }
-    } //  End of for loop
-
-    res.status(200).json({ treasuresFound });
+    res.status(201).send({ treasures });
   } catch (error) {
     console.error("Error finding treasures:", error);
     // Send an error response
@@ -158,42 +160,44 @@ module.exports.findTreasuresByValue = async (req, res) => {
       distance /
       (conversionFactor * Math.cos(parsedLatitude * (Math.PI / 180)));
 
-    // Query to find treasures within the specified latitude and longitude range
-    const treasures = await Treasure.find({
-      latitude: {
-        $gte: parsedLatitude - latRange,
-        $lte: parsedLatitude + latRange,
-      },
-      longitude: {
-        $gte: parsedLongitude - lonRange,
-        $lte: parsedLongitude + lonRange,
-      },
-    });
-
-    const treasuresFound = [];
-
-    // Check if any treasures were found
-    if (treasures.length === 0) {
-      return res
-        .status(404)
-        .json({ status: 404, message: "No treasures found" });
-    }
-
     // If no price_value provided
     if (!price_value) {
-      for (const treasure of treasures) {
-        const { treasureId } = treasure;
+      /* 
+      Query to find treasures within the specified latitude and longitude range 
+      and then joins the prizes document to treasure document
+    */
+      const allTreasures = await Treasure.aggregate([
+        {
+          // Checks if treasure is within the given distance
+          $match: {
+            latitude: {
+              $gte: parsedLatitude - latRange,
+              $lte: parsedLatitude + latRange,
+            },
+            longitude: {
+              $gte: parsedLongitude - lonRange,
+              $lte: parsedLongitude + lonRange,
+            },
+          },
+        },
+        {
+          $lookup: {
+            from: "moneyvalues",
+            localField: "treasureId",
+            foreignField: "treasureId",
+            as: "prizes",
+          },
+        },
+      ]);
 
-        // Get the value of a treasure box according to treasureId
-        const moneyValues = await MoneyValue.find({ treasureId });
+      // Check if any treasures were found
+      if (allTreasures.length === 0) {
+        return res
+          .status(404)
+          .json({ status: 404, message: "No treasures found" });
+      }
 
-        if (moneyValues.length > 0) {
-          // add moneyValue property to treasure object
-          treasuresFound.push({ ...treasure._doc, moneyValues });
-        }
-      } // End of for loop
-
-      return res.status(201).json({ status: 201, treasuresFound });
+      res.status(201).send({ allTreasures });
     } // End of if statement
 
     // If price value is not a whole number
@@ -210,35 +214,66 @@ module.exports.findTreasuresByValue = async (req, res) => {
       });
     }
 
-    /* Lines below executes if price value is provided */
-    for (const treasure of treasures) {
-      const { treasureId } = treasure;
-
-      // Get the value of a treasure box according to treasureId
-      const moneyValues = await MoneyValue.find({ treasureId });
-
-      if (moneyValues.length > 0) {
-        // Sort money values in ascending order to get the minimum money value
-        moneyValues.sort((a, b) => a.value - b.value);
-
-        // Push the treasure with the minimum money value only
-        treasuresFound.push({ ...treasure._doc, moneyValue: moneyValues[0] });
-      }
-    } // End of for loop
-
-    // Filter treasures more than $10 and maximum of price_value
-    const filteredTreasures = treasuresFound.filter((treasure) => {
-      return treasure.moneyValue.amount === price_value;
-    });
+    /* 
+    Lines below executes if price value is provided 
+    - Find treasures within the specified latitude and longitude within specified distance
+    - Find treasures and get only the minimum value of prize 
+    - Join the prize collection into the treasure collection
+    */
+    const treasures = await Treasure.aggregate([
+      {
+        // Checks if treasure is within the given distance
+        $match: {
+          latitude: {
+            $gte: parsedLatitude - latRange,
+            $lte: parsedLatitude + latRange,
+          },
+          longitude: {
+            $gte: parsedLongitude - lonRange,
+            $lte: parsedLongitude + lonRange,
+          },
+        },
+      },
+      {
+        // Joins the prizes document
+        $lookup: {
+          from: "moneyvalues",
+          localField: "treasureId",
+          foreignField: "treasureId",
+          as: "prizes",
+        },
+      },
+      {
+        $unwind: "$prizes", // Unwind/deconstruct prizes array
+      },
+      {
+        $sort: { "prizes.amount": 1 }, // Sort prizes in asc based on amount field
+      },
+      {
+        $match: {
+          "prizes.amount": price_value, // Filter prizes with amount greater than or equal to specified amount
+        },
+      },
+      {
+        $group: {
+          _id: "$_id",
+          treasureId: { $first: "$treasureId" },
+          name: { $first: "$name" },
+          latitude: { $first: "$latitude" },
+          longitude: { $first: "$longitude" },
+          prizes: { $first: "$prizes" }, // Get only the first element / get the minimum value
+        },
+      },
+    ]);
 
     // Check if any treasures were found
-    if (filteredTreasures.length === 0) {
+    if (treasures.length === 0) {
       return res
         .status(404)
         .json({ message: "No treasures found at that price value" });
     }
 
-    res.status(201).json({ filteredTreasures });
+    res.status(201).json({ treasures });
   } catch (error) {
     console.error("Error finding treasures:", error);
     // Send an error response
