@@ -221,7 +221,7 @@ module.exports.findTreasuresByValue = async (req, res) => {
     /* 
     Lines below executes if prize value is provided 
     - Find treasures within the specified latitude and longitude within specified distance
-    - Filter the treasure with the specified prize_value
+    - Filter the treasure that matches the specified prize_value
     - Join the prize collection into the treasure collection
     */
     const treasures = await Treasure.aggregate([
@@ -254,11 +254,6 @@ module.exports.findTreasuresByValue = async (req, res) => {
         $sort: { "prizes.amount": 1 }, // Sort prizes in asc based on amount field
       },
       {
-        $match: {
-          "prizes.amount": prize_value, // Filter prizes with amount greater than or equal to specified amount
-        },
-      },
-      {
         $group: {
           _id: "$_id",
           treasureId: { $first: "$treasureId" },
@@ -270,14 +265,19 @@ module.exports.findTreasuresByValue = async (req, res) => {
       },
     ]);
 
+    // Filter treasures that matches the prize value
+    const filteredTreasures = treasures.filter((treasure) => {
+      return treasure.prizes.amount === prize_value;
+    });
+
     // Check if any treasures were found
-    if (treasures.length === 0) {
+    if (filteredTreasures.length === 0) {
       return res
         .status(404)
         .json({ message: "No treasures found at that prize value" });
     }
 
-    res.status(201).json({ treasures });
+    res.status(201).json({ filteredTreasures });
   } catch (error) {
     console.error("Error finding treasures:", error);
     // Send an error response
