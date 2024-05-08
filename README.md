@@ -60,7 +60,7 @@ nodemon index.js
 - **Add treasure[POST]** - http://localhost:4000/main/add-treasure (Bonus endpoint)
 
 > - Note that you must login and provide the token via Authorization>Bearer Token.
-> - Postman input: Authorization > bearer token, Body > raw > JSON:
+> - Postman input: Authorization > bearer token (from login result), Body > raw > JSON:
 
 ```
 {
@@ -73,7 +73,7 @@ nodemon index.js
 
 - **Add money value[POST]** - http://localhost:4000/main/add-money-value (Bonus endpoint)
   > - Note that you must login and provide the token via Authorization>Bearer Token.
-  > - Postman input: Authorization > bearer token, Body > raw > JSON
+  > - Postman input: Authorization > bearer token (from login result), Body > raw > JSON
 
 ```
 {
@@ -86,7 +86,7 @@ nodemon index.js
   > - Find treasure chests within a specified distance from the provided latitude and longitude
   > - Distance should only be either 1(km) or 10(km).
   > - Note that you must login and provide the token via Authorization>Bearer Token.
-  > - Postman input: Authorization > bearer token, Body > raw > JSON
+  > - Postman input: Authorization > bearer token (from login result), Body > raw > JSON
 
 ```
 {
@@ -101,7 +101,7 @@ nodemon index.js
   > - Price value is optional. If no price value is specified, find the treasure normally same as above.
   > - If the price value is specified and the treasure chest has multiple prize, only the minimum prize will be considered. So if the treasure chest has $10, $20, $30. The $10 will be considered.
   > - Please note that you must login and provide the token via Authorization>Bearer Token.
-  > - Postman input: Authorization > bearer token, Body > raw > JSON
+  > - Postman input: Authorization > bearer token (from login result), Body > raw > JSON
 
 ```
 {
