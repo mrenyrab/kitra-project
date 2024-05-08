@@ -23,7 +23,7 @@ module.exports.verify = (req, res, next) => {
   let token = req.headers.authorization;
 
   if (typeof token === "undefined") {
-    return res.send({ auth: "Failed. No token" });
+    return res.send({ auth: "Failed. No token. Please Login." });
   } else {
     /*
               slice() is a method which can be used on strings and arrays\
