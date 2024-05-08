@@ -52,7 +52,21 @@ nodemon index.js
 }
 ```
 
+- **Login [POST]** - http://localhost:4000/main/login (Bonus endpoint)
+
+  > Please note that you can also log in using the sample accounts available in the repository. You can find them in the sample_data folder by opening the seedUsers.js file.
+
+  > Sample input in postman:
+
+```
+{
+"email": "your-username",
+"password": "your-password"
+}
+```
+
 - **Add treasure[POST]** - http://localhost:4000/main/add-treasure (Bonus endpoint)
+  > Note that you must login and provide the token via Authorization>Bearer Token.
 
 ```
 {
@@ -64,24 +78,12 @@ nodemon index.js
 ```
 
 - **Add money value[POST]** - http://localhost:4000/main/add-money-value (Bonus endpoint)
+  > Note that you must login and provide the token via Authorization>Bearer Token.
 
 ```
 {
 "treasureId": "treasure-id"
 "amount": "prize-amount"
-}
-```
-
-- **Login [POST]** - http://localhost:4000/main/login (Bonus endpoint)
-
-  > Please note that you can also log in using the sample accounts available in the repository. You can find them in the sample_data folder by opening the seedUsers.js file.
-
-  > Sample input in postman:
-
-```
-{
-"email": "your-username",
-"password": "your-password"
 }
 ```
 

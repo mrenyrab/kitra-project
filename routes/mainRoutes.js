@@ -13,10 +13,10 @@ router.post("/login", mainController.login);
 router.post("/register", mainController.register);
 
 // Route for add treasures
-router.post("/add-treasure", mainController.addTreasure);
+router.post("/add-treasure", verify, mainController.addTreasure);
 
 // Route for add moneyValue
-router.post("/add-money-value", mainController.addMoneyValue);
+router.post("/add-money-value", verify, mainController.addMoneyValue);
 
 // Route for finding treasures
 router.get("/find-treasures", verify, mainController.findTreasures);
