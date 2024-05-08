@@ -39,7 +39,7 @@ nodemon index.js
 - **Register [POST]** - http://localhost:4000/main/register (Bonus endpoint)
 
   > This step is optional, as there are already provided accounts. Please proceed directly to the login page if you dont want to register.
-
+  > Please note that you can also log in using the sample accounts available in the repository. You can find them in the sample_data folder by opening the seedUsers.js file.
   > Sample input in postman:
 
 ```
