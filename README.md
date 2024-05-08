@@ -113,7 +113,7 @@ nodemon index.js
 
   > Please note that you must login and provide the token via Authorization>Bearer Token.
 
-- Sample input in postman:
+  > Sample input in postman:
 
 ```
 {
