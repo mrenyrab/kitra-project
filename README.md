@@ -43,9 +43,6 @@ nodemon index.js
   > Sample input in postman:
 
 ```
-
-
-
 {
 "userId": "your-userId",
 "name": "your-name",
