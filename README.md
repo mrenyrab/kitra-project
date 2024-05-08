@@ -9,25 +9,13 @@
 - **Install** the dependencies of the project by opening terminal and run command below:
 
 ```
-
-
-
 npm install
-
-
-
 ```
 
 - After installing, **run the project**. As for me, I execute the command below.
 
 ```
-
-
-
 nodemon index.js
-
-
-
 ```
 
 - I have provided **kitra.postman_collection** so that you may be able to **import** it on your postman for testing the project.
@@ -59,41 +47,12 @@ nodemon index.js
 
 
 {
-
-
-
 "userId": "your-userId",
-
-
-
-
-
 "name": "your-name",
-
-
-
-
-
 "age": "your-age"
-
-
-
-
-
 "password": "your-password",
-
-
-
-
-
 "email": "your-email"
-
-
-
 }
-
-
-
 ```
 
 - **Add treasure[POST]** - http://localhost:4000/main/add-treasure (Bonus endpoint)
@@ -123,31 +82,10 @@ nodemon index.js
   > Sample input in postman:
 
 ```
-
-
-
 {
-
-
-
-
-
 "email": "your-username",
-
-
-
-
-
 "password": "your-password"
-
-
-
-
-
 }
-
-
-
 ```
 
 - **Find treasure [GET]** - http://localhost:4000/main/find-treasures
@@ -161,37 +99,11 @@ nodemon index.js
   > Sample input in postman:
 
 ```
-
-
-
 {
-
-
-
-
-
 "latitude": "14.5437648051331",
-
-
-
-
-
 "longitude": "121.019911678311",
-
-
-
-
-
 "distance": 5
-
-
-
-
-
 }
-
-
-
 ```
 
 - **Find treasure by value [GET]** - http://localhost:4000/main/find-treasures-by-value
@@ -207,41 +119,10 @@ nodemon index.js
 - Sample input in postman:
 
 ```
-
-
-
 {
-
-
-
-
-
 "latitude": "14.5437648051331",
-
-
-
-
-
 "longitude": "121.019911678311",
-
-
-
-
-
 "distance": 10,
-
-
-
-
-
 "price_value": 20 --> (optional)
-
-
-
-
-
 }
-
-
-
 ```
