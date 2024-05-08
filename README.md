@@ -30,6 +30,7 @@ nodemon index.js
 
 - **Migration/Seeding [POST]**
 
+  - This step is optional to run since it is already added on the database
   - User - http://localhost:4000/seed/seed-user
   - Treasures - http://localhost:4000/seed/seed-treasures
   - Money Values - http://localhost:4000/seed/seed-money-values

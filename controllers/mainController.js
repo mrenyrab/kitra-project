@@ -284,3 +284,42 @@ module.exports.findTreasuresByValue = async (req, res) => {
     res.status(500).json({ status: 500, error: "Internal server error" });
   }
 }; // End of findTreasuresByValue
+
+const test = async () => {
+  /* 
+      Find treasures within the specified latitude and longitude 
+      within specified distance and then joins the prizes document 
+      to treasure document
+    */
+  const allTreasures = await Treasure.aggregate([
+    {
+      // Checks if treasure is within the given distance
+      $match: {
+        latitude: {
+          $gte: parsedLatitude - latRange,
+          $lte: parsedLatitude + latRange,
+        },
+        longitude: {
+          $gte: parsedLongitude - lonRange,
+          $lte: parsedLongitude + lonRange,
+        },
+      },
+    },
+    {
+      // Join the prizes document to treasure document
+      $lookup: {
+        from: "moneyvalues",
+        localField: "treasureId",
+        foreignField: "treasureId",
+        as: "prizes",
+      },
+    },
+  ]);
+
+  // Check if any treasures were found
+  if (allTreasures.length === 0) {
+    return res.status(404).json({ status: 404, message: "No treasures found" });
+  }
+
+  res.status(201).send({ allTreasures });
+};
