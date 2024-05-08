@@ -15,6 +15,9 @@ router.post("/register", mainController.register);
 // Route for add treasures
 router.post("/add-treasure", mainController.addTreasure);
 
+// Route for add moneyValue
+router.post("/add-money-value", mainController.addMoneyValue);
+
 // Route for finding treasures
 router.get("/find-treasures", verify, mainController.findTreasures);
 

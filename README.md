@@ -10,7 +10,11 @@
 
 ```
 
+
+
 npm install
+
+
 
 ```
 
@@ -18,7 +22,11 @@ npm install
 
 ```
 
+
+
 nodemon index.js
+
+
 
 ```
 
@@ -30,11 +38,15 @@ nodemon index.js
 
 - **Migration/Seeding [POST]**
 
-  - This step is optional to run since it is already added on the database
-  - User - http://localhost:4000/seed/seed-user
-  - Treasures - http://localhost:4000/seed/seed-treasures
-  - Money Values - http://localhost:4000/seed/seed-money-values
-  - Provided on the collection file under seed sample data folder
+- This step is optional to run since it is already added on the database
+
+- User - http://localhost:4000/seed/seed-user
+
+- Treasures - http://localhost:4000/seed/seed-treasures
+
+- Money Values - http://localhost:4000/seed/seed-money-values
+
+- Provided on the collection file under seed sample data folder
 
 - **Register [POST]** - http://localhost:4000/main/register (Bonus endpoint)
 
@@ -44,9 +56,15 @@ nodemon index.js
 
 ```
 
+
+
 {
 
+
+
 "userId": "your-userId",
+
+
 
 
 
@@ -54,7 +72,11 @@ nodemon index.js
 
 
 
+
+
 "age": "your-age"
+
+
 
 
 
@@ -62,10 +84,36 @@ nodemon index.js
 
 
 
+
+
 "email": "your-email"
+
+
 
 }
 
+
+
+```
+
+- **Add treasure[POST]** - http://localhost:4000/main/add-treasure (Bonus endpoint)
+
+```
+{
+"treasureId": "treasure-id"
+"latitude": "treasure-latitude"
+"longitude": "treasure-longitude"
+"name": "treasure-name"
+}
+```
+
+- **Add money value[POST]** - http://localhost:4000/main/add-money-value (Bonus endpoint)
+
+```
+{
+"treasureId": "treasure-id"
+"amount": "prize-amount"
+}
 ```
 
 - **Login [POST]** - http://localhost:4000/main/login (Bonus endpoint)
@@ -76,7 +124,11 @@ nodemon index.js
 
 ```
 
+
+
 {
+
+
 
 
 
@@ -84,11 +136,17 @@ nodemon index.js
 
 
 
+
+
 "password": "your-password"
 
 
 
+
+
 }
+
+
 
 ```
 
@@ -104,7 +162,11 @@ nodemon index.js
 
 ```
 
+
+
 {
+
+
 
 
 
@@ -112,7 +174,11 @@ nodemon index.js
 
 
 
+
+
 "longitude": "121.019911678311",
+
+
 
 
 
@@ -120,7 +186,11 @@ nodemon index.js
 
 
 
+
+
 }
+
+
 
 ```
 
@@ -138,7 +208,11 @@ nodemon index.js
 
 ```
 
+
+
 {
+
+
 
 
 
@@ -146,7 +220,11 @@ nodemon index.js
 
 
 
+
+
 "longitude": "121.019911678311",
+
+
 
 
 
@@ -154,10 +232,16 @@ nodemon index.js
 
 
 
+
+
 "price_value": 20 --> (optional)
 
 
 
+
+
 }
+
+
 
 ```

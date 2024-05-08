@@ -79,8 +79,14 @@ module.exports.addTreasure = async (req, res) => {
         .json({ status: 404, message: "All fields are required." });
     }
 
+    if (typeof latitude === "string" || typeof longitude === "string") {
+      return res
+        .status(404)
+        .json({ status: 404, message: "Longitude should not contain string." });
+    }
+
     // Check email if already exists
-    const existingTreasure = await User.findOne({
+    const existingTreasure = await Treasure.findOne({
       treasureId: req.body.treasureId,
     });
 
@@ -112,7 +118,41 @@ module.exports.addTreasure = async (req, res) => {
   }
 }; //End of addTreasure
 
-module.exports.addMoneyValue = async (req, res) => {}; //End of addTreasure
+module.exports.addMoneyValue = async (req, res) => {
+  try {
+    const { treasureId, amount } = req.body;
+
+    if (!treasureId || !amount) {
+      return res
+        .status(404)
+        .json({ status: 404, message: "All fields are required." });
+    }
+
+    if (typeof amount === "string") {
+      return res
+        .status(404)
+        .json({ status: 404, message: "Amount should not contain string." });
+    }
+
+    // Create new user
+    const newMoneyValue = new MoneyValue({
+      treasureId,
+      amount,
+    });
+
+    // Save user to database
+    await newMoneyValue.save();
+
+    // Return success response with status 201 (Created)
+    return res
+      .status(201)
+      .json({ status: 201, message: "Money value added successfully." });
+  } catch (error) {
+    console.error("Error adding money value:", error);
+    // Send an error response
+    res.status(500).json({ error: "Internal server error" });
+  }
+}; //End of addMoneyValue
 
 module.exports.findTreasures = async (req, res) => {
   try {
