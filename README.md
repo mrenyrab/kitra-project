@@ -5,7 +5,6 @@
 ## Getting started
 
 - Clone the **Kitra** repository in your computer.
-
 - **Install** the dependencies of the project by opening terminal and run command below:
 
 ```
@@ -19,28 +18,22 @@ nodemon index.js
 ```
 
 - I have provided **kitra.postman_collection** so that you may be able to **import** it on your postman for testing the project.
-
 - **Open your postman application** and **import the collection file** which is located on root folder of the repository.
 
 ## API Guides
 
 - **Migration/Seeding [POST]**
 
-  > This step is optional to run since it is already added on the database
-
-  > User - http://localhost:4000/seed/seed-user
-
-  > Treasures - http://localhost:4000/seed/seed-treasures
-
-  > Money Values - http://localhost:4000/seed/seed-money-values
-
-  > Provided on the collection file under seed sample data folder
+  > - This step is optional to run since it is already added on the database
+  > - User - http://localhost:4000/seed/seed-user
+  > - Treasures - http://localhost:4000/seed/seed-treasures
+  > - Money Values - http://localhost:4000/seed/seed-money-values
+  > - Provided on the collection file under seed sample data folder
 
 - **Register [POST]** - http://localhost:4000/main/register (Bonus endpoint)
-
-  > This step is optional, as there are already provided accounts. Please proceed directly to the login page if you dont want to register.
-  > Please note that you can also log in using the sample accounts available in the repository. You can find them in the sample_data folder by opening the seedUsers.js file.
-  > Sample input in postman:
+  > - This step is optional, as there are already provided accounts. Please proceed directly to the login page if you dont want to register.
+  > - Please note that you can also log in using the sample accounts available in the repository. You can find them in the sample_data folder by opening the seedUsers.js file.
+  > - Postman input [raw, json]:
 
 ```
 {
@@ -53,10 +46,8 @@ nodemon index.js
 ```
 
 - **Login [POST]** - http://localhost:4000/main/login (Bonus endpoint)
-
-  > Please note that you can also log in using the sample accounts available in the repository. You can find them in the sample_data folder by opening the seedUsers.js file.
-
-  > Sample input in postman:
+  > - Please note that you can also log in using the sample accounts available in the repository. You can find them in the sample_data folder by opening the seedUsers.js file.
+  > - Postman input [raw, json]:
 
 ```
 {
@@ -66,7 +57,9 @@ nodemon index.js
 ```
 
 - **Add treasure[POST]** - http://localhost:4000/main/add-treasure (Bonus endpoint)
-  > Note that you must login and provide the token via Authorization>Bearer Token.
+
+> - Note that you must login and provide the token via Authorization>Bearer Token.
+> - Postman input [raw, json]:
 
 ```
 {
@@ -78,7 +71,8 @@ nodemon index.js
 ```
 
 - **Add money value[POST]** - http://localhost:4000/main/add-money-value (Bonus endpoint)
-  > Note that you must login and provide the token via Authorization>Bearer Token.
+  > - Note that you must login and provide the token via Authorization>Bearer Token.
+  > - Postman input [raw, json]:
 
 ```
 {
@@ -88,14 +82,10 @@ nodemon index.js
 ```
 
 - **Find treasure [GET]** - http://localhost:4000/main/find-treasures
-
-  > Find treasure chests within a specified distance from the provided latitude and longitude
-
-  > Distance should only be either 1(km) or 10(km).
-
-  > Note that you must login and provide the token via Authorization>Bearer Token.
-
-  > Sample input in postman:
+  > - Find treasure chests within a specified distance from the provided latitude and longitude
+  > - Distance should only be either 1(km) or 10(km).
+  > - Note that you must login and provide the token via Authorization>Bearer Token.
+  > - Postman input [raw, json]:
 
 ```
 {
@@ -106,16 +96,11 @@ nodemon index.js
 ```
 
 - **Find treasure by value [GET]** - http://localhost:4000/main/find-treasures-by-value
-
-  > Find treasure chests within a specified distance from the provided latitude and longitude that matches the specified price value.
-
-  > Price value is optional. If no price value is specified, find the treasure normally same as above.
-
-  > If the price value is specified and the treasure chest has multiple prize, only the minimum prize will be considered. So if the treasure chest has $10, $20, $30. The $10 will be considered.
-
-  > Please note that you must login and provide the token via Authorization>Bearer Token.
-
-  > Sample input in postman:
+  > - Find treasure chests within a specified distance from the provided latitude and longitude that matches the specified price value.
+  > - Price value is optional. If no price value is specified, find the treasure normally same as above.
+  > - If the price value is specified and the treasure chest has multiple prize, only the minimum prize will be considered. So if the treasure chest has $10, $20, $30. The $10 will be considered.
+  > - Please note that you must login and provide the token via Authorization>Bearer Token.
+  > - Postman input [raw, json]:
 
 ```
 {
@@ -124,4 +109,5 @@ nodemon index.js
 "distance": 10,
 "price_value": 20 --> (optional)
 }
+
 ```
