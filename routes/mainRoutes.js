@@ -9,8 +9,11 @@ const router = express.Router();
 // Route for login
 router.post("/login", mainController.login);
 
-// Route for login
+// Route for register
 router.post("/register", mainController.register);
+
+// Route for add treasures
+router.post("/add-treasure", mainController.addTreasure);
 
 // Route for finding treasures
 router.get("/find-treasures", verify, mainController.findTreasures);
