@@ -29,6 +29,7 @@ nodemon index.js
   > - Treasures - http://localhost:4000/seed/seed-treasures
   > - Money Values - http://localhost:4000/seed/seed-money-values
   > - Provided on the collection file under seed sample data folder
+  > - No required input on postman
 
 - **Register [POST]** - http://localhost:4000/main/register (Bonus endpoint)
   > - This step is optional, as there are already provided accounts. Please proceed directly to the login page if you dont want to register.
