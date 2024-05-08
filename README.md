@@ -196,9 +196,9 @@ nodemon index.js
 
 - **Find treasure by value [GET]** - http://localhost:4000/main/find-treasures-by-value
 
-- Find treasure chests within a specified distance from the provided latitude and longitude that matches the specified price value.
+  -- Find treasure chests within a specified distance from the provided latitude and longitude that matches the specified price value.
 
-- Price value is optional. If no price value is specified, find the treasure normally same as above.
+  -- Price value is optional. If no price value is specified, find the treasure normally same as above.
 
 - If the price value is specified and the treasure chest has multiple prize, only the minimum prize will be considered. So if the treasure chest has $10, $20, $30. The $10 will be considered.
 
