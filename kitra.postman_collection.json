@@ -214,6 +214,64 @@
 			"response": []
 		},
 		{
+			"name": "add treasure",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"treasureId\": \"119\",\r\n    \"latitude\": 14.5457648051331,\r\n    \"longitude\": 121.061774532421,\r\n    \"name\": \"T19\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/main/add-treasure",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"main",
+						"add-treasure"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add money value",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"treasureId\": \"100\",\r\n    \"amount\": 35\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/main/add-money-value",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"main",
+						"add-money-value"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "find treasures",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
